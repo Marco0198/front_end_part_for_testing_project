@@ -1,24 +1,78 @@
 <template lang="">
-      <Layout name="LayoutDefault">
-    <base-form >
-     <form @submit.prevent="">
-       <h3>Reset Password</h3>
-        <input type="text" required placeholder="enter your token"/><br>
-        <input type="password" required placeholder=" enter your new password"/><br>
-        <input type="password" required placeholder=" confirmation new password"/>
-        <br><br>
-        <button type="submit" class="btn btn-danger">Reset</button>
-        </form>
-       </base-form>
-    </Layout >
+    <Layout name="LayoutDefault">
+       
+    <div>
+        <b-card>
+        <h2>Sign Up</h2>
+    <b-form @submit="onSubmit" v-if="show">
+      <b-form-group
+        id="input-group-1"
+        label-for="input-1"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="form.token"
+          type="text"
+          placeholder="Enter your Token"
+          required
+       
+        ></b-form-input>
+      </b-form-group>
+       
+
+      <b-form-group id="input-group-3" >
+        <b-form-input
+          id="input-3"
+          v-model="form.password"
+            type="password"
+          placeholder="Enter your new Password"
+          required
+       
+        ></b-form-input>
+      
+      </b-form-group>
+        <b-form-group id="input-group-4" >
+        <b-form-input
+          id="input-4"
+          v-model="form.passwordConf"
+            type="password"
+          placeholder="Enter new Password Confirmation"
+          required
+      
+        ></b-form-input>
+      
+      </b-form-group>
+      <b-button type="submit" variant="danger">Submit</b-button>
+    </b-form>
+    </b-card>
+  </div>
+       
+    </Layout>
 </template>
 <script>
 import Layout from '@/layouts/Layout';
-import BaseForm from '@/components/UI/BaseForm.vue'
+//import BaseForm from '@/components/UI/BaseForm.vue'
 export default {
-components: {BaseForm,Layout}
+components: {Layout},
+data() {
+      return {
+        form: {
+          token :'',
+          password: '',
+          passwordConf: '',
+
+        },
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault()
+        alert(JSON.stringify(this.form))
+      }
+    }
 }
 </script>
-<style lang="">
-    
+ <style >
+   
 </style>

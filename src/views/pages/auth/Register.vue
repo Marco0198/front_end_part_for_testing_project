@@ -1,25 +1,90 @@
 <template lang="">
     <Layout name="LayoutDefault">
-    <base-form >
-     <form @submit.prevent="">
-       <h3>Sign Up</h3>
-        <input type="text" required placeholder="Name"/><br>
-        <input type="email" required placeholder="email"/><br>
-        <input type="password" required placeholder="password"/><br>
-        <input type="password" required placeholder="password confirmation"/>
-        <br><br>
-        <button type="submit" class="btn btn-danger">Register</button>
-        </form>
-       </base-form>
-   </Layout>
+       
+    <div>
+        <b-card>
+        <h2>Sign Up</h2>
+    <b-form @submit="onSubmit" v-if="show">
+      <b-form-group
+        id="input-group-1"
+        label-for="input-1"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="form.userName"
+          type="text"
+          placeholder="Enter Username"
+          required
+       
+        ></b-form-input>
+      </b-form-group>
+       <b-form-group
+        id="input-group-2"
+      >
+        <b-form-input
+          id="input-2"
+          v-model="form.email"
+          type="email"
+          placeholder="Enter email"
+          required
+       
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-3" >
+        <b-form-input
+          id="input-3"
+          v-model="form.password"
+            type="password"
+          placeholder="Enter Password"
+          required
+       
+        ></b-form-input>
+      
+      </b-form-group>
+        <b-form-group id="input-group-4" >
+        <b-form-input
+          id="input-4"
+          v-model="form.passwordConf"
+            type="password"
+          placeholder="Enter Password Confirmation"
+          required
+      
+        ></b-form-input>
+      
+      </b-form-group>
+      <b-button type="submit" variant="danger">Submit</b-button>
+    </b-form>
+    </b-card>
+  </div>
+       
+    </Layout>
 </template>
 <script>
-import BaseForm from '@/components/UI/BaseForm.vue'
 import Layout from '@/layouts/Layout';
+//import BaseForm from '@/components/UI/BaseForm.vue'
 export default {
-components: {BaseForm,Layout}
+components: {Layout},
+data() {
+      return {
+        form: {
+          userName: '',
+          email: '',
+          password: '',
+          passwordConf: '',
+
+        },
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault()
+        alert(JSON.stringify(this.form))
+      }
+    }
 }
 </script>
-<style >
-    
+ <style >
+   
 </style>
