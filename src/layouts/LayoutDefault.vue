@@ -10,6 +10,7 @@
     <the-footer></the-footer>
     </footer>
   </div>
+  
 </template>
 
 <script>
@@ -27,8 +28,11 @@ export default {
   justify-content :center;
   margin-top: 100px;
   text-align: center;
-  margin-bottom: 700px;
+  min-height:800px;
+ background-attachment: fixed;
 
 }
 </style>
+
+
 
