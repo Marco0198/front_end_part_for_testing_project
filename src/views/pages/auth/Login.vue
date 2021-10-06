@@ -29,7 +29,8 @@
       </b-form-group>
       <b-button type="submit" variant="danger">submit</b-button>
     </b-form>
-    
+     <router-link to="/register">Register</router-link><br>
+     <router-link to="/request_token">Forgot password</router-link> 
     </base-form>
   </div>
        
