@@ -2,8 +2,8 @@
     <Layout name="LayoutDefault">
        
     <div>
-        <b-card>
-        <h2>Sign Up</h2>
+         <base-form>
+        <h2>Reset Password</h2>
     <b-form @submit="onSubmit" v-if="show">
       <b-form-group
         id="input-group-1"
@@ -44,16 +44,16 @@
       </b-form-group>
       <b-button type="submit" variant="danger">Submit</b-button>
     </b-form>
-    </b-card>
+    </base-form>
   </div>
        
     </Layout>
 </template>
 <script>
 import Layout from '@/layouts/Layout';
-//import BaseForm from '@/components/UI/BaseForm.vue'
+import BaseForm from '@/components/UI/BaseForm.vue'
 export default {
-components: {Layout},
+components: {Layout,BaseForm },
 data() {
       return {
         form: {

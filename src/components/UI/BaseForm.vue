@@ -1,27 +1,14 @@
 <template lang="">
-    <div class="card">
-    <slot>
-       
-    </slot>
-    </div>
+  <div>
+  <b-card
+    style="max-width: 30rem;"
+    class="mb-2 mx-auto shadow p-3 mb-5 bg-white rounded"> 
+ <slot></slot>
+  </b-card>
+</div>
 </template>
 <script>
 export default {
     
 }
 </script>
-<style >
-.card 
-{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 500px;
-  height:auto;
-  padding-bottom: 50px;
-  border-radius: 5px;
-  justify-content: center;
-  display: inline-block;
-  margin: auto;
-}
-
-</style>

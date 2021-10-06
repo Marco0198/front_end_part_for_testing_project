@@ -12,8 +12,7 @@
         <b-nav-item to="/" >Home</b-nav-item>
         <b-nav-item to="/about">About</b-nav-item>
         <b-nav-item to="/contact">Contact</b-nav-item>
-        <b-nav-item :to="{ path: '/Taskboard' }" >Tasboard</b-nav-item>
-
+        
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

@@ -9,8 +9,8 @@ import Register from "../views/pages/auth/Register.vue";
 import RequestResetPassword from "../views/pages/auth/RequestResetPassword.vue";
 import ResetPassword from "../views/pages/auth/ResetPassword.vue";
 import NotFound from "../views/pages/NotFound.vue";
-import Recover from "../views/pages/Recover.vue";
-import CreateTask from "../views/pages/CreateTask.vue";
+
+
 
 Vue.use(VueRouter)
 
@@ -59,18 +59,6 @@ const routes = [
     path: "/reset_password",
     name: "ResetPassword",
     component: ResetPassword,
-   
-  },
-  {
-    path: "/recover_task",
-    name: "recover",
-    component: Recover,
-   
-  },
-  {
-    path: "/create_task",
-    name: "CreateTask",
-    component: CreateTask,
    
   },
    {
