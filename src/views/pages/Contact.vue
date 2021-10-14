@@ -1,8 +1,6 @@
 <template>
  <Layout name="LayoutDefault">
-  <div class="content">
-    <h1>contact page</h1>
-  </div>
+    <h1>Contact Page</h1>
   </Layout>
 </template>
 <script>
