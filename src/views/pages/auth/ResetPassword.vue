@@ -104,14 +104,14 @@ export default {
                 // passwordConf:this.form.passwordConf,
             }
             console.log(formData),
-                axios.post('http://127.0.0.1:8000/api/reset_password', formData, {
+                axios.post('https://mmt-web.herokuapp.com/api/reset_password', formData, {
                     headers: {
                         'content-type': 'aplication/json'
                     }
                 })
                 .then(res => (this.formData = res.data)).
             catch(error => console.log(error.message))
-            alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+           // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
         }
     }
 }

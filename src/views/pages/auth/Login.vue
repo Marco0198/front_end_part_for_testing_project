@@ -79,10 +79,10 @@ export default {
 
             }
             console.log(formData),
-                axios.post('http://127.0.0.1:8000/api/login', formData)
+                axios.post('https://mmt-web.herokuapp.com/api/login', formData)
                 .then(res => (this.formData = res.data)).
             catch(error => console.log(error.message))
-            alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+            //alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
         }
     }
 }
