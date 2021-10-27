@@ -2,11 +2,16 @@
 <Layout name="LayoutDefault">
     <div>
         <base-form>
-            <h1>Reset password</h1>
+            <h5>Reset password</h5>
             <form @submit.prevent="handleSubmit">
+                <div class="alert alert-success" v-if="success"> Password succesfully change</div>
+                
+
                 <div class="form-group">
-                    <input type="text" v-model="user.token" id="firstName" name="firstName" placeholder="Enter your token" class="form-control" :class="{ 'is-invalid': submitted && $v.user.userName.$error }" />
+                    
+                    <input type="text" v-model="user.token" id="firstName" name="firstName" placeholder="Enter your token" class="form-control" :class="{ 'is-invalid': submitted && $v.user.token.$error }" />
                     <div v-if="submitted && !$v.user.token.required" class="invalid-feedback"> token is required</div>
+                    <span class="text-danger " v-if="submitted &&errors && errors.errors"><small>{{errors.errors.token[0]}} request for a new one</small></span>
                 </div>
                 <div class="form-group">
 
@@ -14,9 +19,8 @@
                     <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
                         <span v-if="!$v.user.email.required">Email is required</span>
                         <span v-if="!$v.user.email.email">Email is invalid</span>
-                        <span v-if="!$v.user.email.invalidEmail">Email is already taken</span>
-
                     </div>
+                    <div class="text-danger"  v-if="submitted &&errors && errors.errors"><small>{{errors.errors.email[0]}} </small></div>
                 </div>
                 <div class="form-group">
                     <input type="password" v-model="user.password" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }" />
@@ -33,8 +37,12 @@
                         <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-danger">Register</button>
+                  <div class="form-group">
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus === 'PENDING'">Reset</button>
+                     <p class="alert alert-warning" v-if="submitStatus === 'PENDING'">Sending...</p>
+                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <p>{{errors.errors.email[0]}}</p>
+                </div> -->
                 </div>
             </form>
 
@@ -65,9 +73,13 @@ export default {
                 token: "",
                 email: "",
                 password: "",
-                confirmPassword: ""
+                confirmPassword: "",
+              
             },
-            submitted: false
+              submitStatus: null,
+              submitted: false,
+              success:false,
+              errors: ""
         };
     },
     validations: {
@@ -94,8 +106,17 @@ export default {
             this.submitted = true;
             // stop here if form is invalid
             this.$v.$touch();
+             
             if (this.$v.$invalid) {
-                return;
+               
+                this.submitStatus = 'ERROR'
+                
+            } else {
+                // do your submit logic here
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                    this.submitStatus = 'OK'
+                }, 500)
             }
             let formData = {
                 token: this.user.token,
@@ -109,8 +130,27 @@ export default {
                         'content-type': 'aplication/json'
                     }
                 })
-                .then(res => (this.formData = res.data)).
-            catch(error => console.log(error.message))
+                .then(res =>{
+                 this.submitted = false;
+                this.user={
+                token: "",
+                email: "",
+                password: "",
+                confirmPassword: ""
+            }
+                    this.success=true;
+                    (this.formData = res.data)
+                    
+                
+                } ).
+            catch(error => {
+                   if (error.response.status == 422) {
+                    this.success=false;
+                    this.errors = error.response.data;
+                   
+                }
+                console.log(this.errors)
+                })
            // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
         }
     }

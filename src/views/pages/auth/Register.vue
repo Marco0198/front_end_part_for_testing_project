@@ -4,26 +4,31 @@
         <base-form>
             <h1>Sign Up</h1>
             <form @submit.prevent="handleSubmit">
+                <div class="alert alert-success" v-if="success"> Registration succesfull</div>
+              <!-- <div class="alert alert-danger" v-if="submitted &&errors && errors.errors">
+                    <p>{{errors.errors.email[0]}}</p>
+                </div> -->
                 <div class="form-group">
                     <input type="text" v-model="user.userName" id="firstName" name="firstName" placeholder="UserName" class="form-control" :class="{ 'is-invalid': submitted && $v.user.userName.$error }" />
                     <div v-if="submitted && !$v.user.userName.required" class="invalid-feedback"> Name is required</div>
+                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <p>{{errors.errors.name[0]}}</p>
+                </div>-->
                 </div>
                 <div class="form-group">
 
-                    <input type="email" v-model="user.email" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" />
-                    <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
-                        <span v-if="!$v.user.email.required">Email is required</span>
-                        <span v-if="!$v.user.email.email">Email is invalid</span>
-                        <span v-if="!$v.user.email.invalidEmail">Email is already taken</span>
-
-                    </div>
+                    <input v-model="user.email" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" />
+                    
+                    <span class="text-danger .fs-2" v-if="submitted &&errors && errors.errors"><small>{{errors.errors.email[0]}}</small></span>
                 </div>
                 <div class="form-group">
                     <input type="password" v-model="user.password" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }" />
                     <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
                         <span v-if="!$v.user.password.required">Password is required</span>
-                        <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
                     </div>
+                     <!-- <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <p>{{errors.errors.password[0]}}</p>
+                </div> -->
                 </div>
                 <div class="form-group">
 
@@ -31,11 +36,17 @@
                     <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback">
                         <span v-if="!$v.user.confirmPassword.required">Confirm Password is required</span>
                         <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
-                    </div>
+                    </div> 
+                  
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-danger">Register</button>
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus === 'PENDING'">Register</button>
+                     <p class="alert alert-warning" v-if="submitStatus === 'PENDING'">Sending...</p>
+                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <p>{{errors.errors.email[0]}}</p>
+                </div> -->
                 </div>
+
             </form>
 
         </base-form>
@@ -50,7 +61,7 @@ import {
     email,
     minLength,
     sameAs
-} 
+}
 from "vuelidate/lib/validators"
 import BaseForm from '@/components/UI/BaseForm.vue'
 import axios from 'axios'
@@ -67,7 +78,11 @@ export default {
                 password: "",
                 confirmPassword: ""
             },
-            submitted: false
+            submitted: false,
+            success: false,
+            submitStatus: null,
+            errors: "",
+            message: ""
         };
     },
     validations: {
@@ -91,27 +106,51 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.submitted = true;
+               this.submitted = true;
             // stop here if form is invalid
-            this.$v.$touch();
+               this.$v.$touch();
             if (this.$v.$invalid) {
-                return;
+               
+                this.submitStatus = 'ERROR'
+                
+            } else {
+                // do your submit logic here
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                    this.submitStatus = 'OK'
+                }, 500)
             }
+
             let formData = {
                 name: this.user.userName,
                 email: this.user.email,
                 password: this.user.password,
                 // passwordConf:this.form.passwordConf,
             }
+
             console.log(formData),
                 axios.post('https://mmt-web.herokuapp.com/api/register', formData, {
-                    headers: {
-                        'content-type': 'aplication/json'
-                    }
-                })
-                .then(res => (this.formData = res.data)).
-            catch(error => console.log(error.message))
-           // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+
+                }, ).then(res => {this.success = true, 
+                this.submitted = false;
+                this.errors= "",
+                this.formData = res.data,
+                this.user ={
+                userName: null,
+                email: null,
+                password: null,
+                confirmPassword: null
+            }
+                }).
+            catch(error => {
+                if (error.response.status == 422) {
+                     this.success = false
+                    this.errors = error.response.data;
+                }
+                this.message = this.errors.errors.email[0],
+                    console.log(this.message)
+            })
+
         }
     }
 }
