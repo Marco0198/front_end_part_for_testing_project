@@ -32,7 +32,8 @@
                     <p>{{errors.errors.email[0]}}</p>
                 </div> -->
                 </div>
-
+                <router-link to="/register">Register</router-link><br>
+                <router-link to="/request_token">Forgot Password</router-link>
             </form>
 
         </base-form>
