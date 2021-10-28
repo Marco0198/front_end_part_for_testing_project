@@ -27,7 +27,7 @@
                
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit" :disabled="submitStatus === 'PENDING'">Login</button>
-                     <p v-if="submitStatus === 'PENDING'"><b-spinner variant="primary" label="Loading...">Sending...</b-spinner></p>
+                     <p class="alert alert-warning" v-if="submitStatus === 'PENDING'">Sending...</p>
                     <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
                     <p>{{errors.errors.email[0]}}</p>
                 </div> -->
@@ -99,7 +99,7 @@ export default {
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
                     this.submitStatus = 'OK'
-                }, 600)
+                }, 800)
             }
 
             let formData = {
