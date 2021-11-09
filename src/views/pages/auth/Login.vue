@@ -11,13 +11,13 @@
                
                 <div class="form-group">
 
-                    <input v-model="user.email" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" />
+                    <input v-model="$v.user.email.$model" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" />
                     
                     <span class="text-danger .fs-2" v-if="submitted &&errors && errors.errors"><small>{{errors.errors.email[0]}} please register first</small></span>
                 </div>
                 <div class="form-group">
-                    <input type="password" v-model="user.password" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }" />
-                    <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+                    <input type="password" v-model="$v.user.password.$model" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }" />
+                    <div v-if="$v.user.password.$error" class="invalid-feedback">
                         <span v-if="!$v.user.password.required">Password is required</span>
                     </div>
                      <!-- <div class="alert alert-danger" v-if="errors && errors.errors">

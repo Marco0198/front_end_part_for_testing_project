@@ -1,6 +1,10 @@
 <template>
  <Layout name="LayoutDefault">
-    <h1>about page</h1>
+   
+    <div> <h1>about page</h1>
+    
+
+    </div>
   </Layout>
 </template>
 <script>
