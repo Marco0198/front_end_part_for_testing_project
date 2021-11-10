@@ -24,7 +24,7 @@
                         <span v-if="!$v.user.email.required">Email is required</span>
                         <span v-if="!$v.user.email.email">Email is invalid</span>
                     </div>
-                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
+                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email}}</small></div>
                 </div>
                   
                     <div class="form-group">
