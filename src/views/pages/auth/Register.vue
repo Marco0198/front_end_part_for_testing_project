@@ -3,7 +3,7 @@
     <div>
         <base-form>
             <h1>Sign Up</h1>
-            <form @submit.prevent="handleSubmit">
+            <form  @submit.stop.prevent="handleSubmit">
               <div class="alert alert-success" v-if="message && message.message ">
                     <p>{{message.message}}</p>
                 </div>
@@ -146,21 +146,21 @@ export default {
             console.log(formData),
                 axios.post('https://mmt-web.herokuapp.com/api/register', formData, {
 
+                
                 }, ).then(res => {
 
                 this.success = true, 
                 this.submitted = false;
-                
                 this.message = res.data;
                 console.log(this.message)
-            //     this.user ={
-            //     name: null,
-            //     email: null,
-            //     password: null,
-            //     confirmPassword: null,
-                
-                
-            // }
+                this.user ={
+                name: null,
+                email: null,
+                password: null,
+                confirmPassword: null,
+                 
+            }
+            
                 }).
             catch(error => {
                 if (error.response.status == 422) {

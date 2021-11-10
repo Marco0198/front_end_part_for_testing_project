@@ -11,26 +11,32 @@
                
                 <div class="form-group">
 
-                    <input v-model="$v.user.email.$model" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" />
-                    
-                    <span class="text-danger .fs-2" v-if="submitted &&errors && errors.errors"><small>{{errors.errors.email[0]}} please register first</small></span>
-                </div>
-                <div class="form-group">
-                    <input type="password" v-model="$v.user.password.$model" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }" />
-                    <div v-if="$v.user.password.$error" class="invalid-feedback">
-                        <span v-if="!$v.user.password.required">Password is required</span>
+                    <input v-model="$v.user.email.$model" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid':  $v.user.email.$error }" />
+                    <div v-if="$v.user.email.$error" class="invalid-feedback">
+                        <span v-if="!$v.user.email.required">Email is required</span>
+                        <span v-if="!$v.user.email.email">Email is invalid</span>
+                  
+
                     </div>
-                     <!-- <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
+                </div>
+                   
+                    <div class="form-group">
+                    <input type="password" v-model="$v.user.password.$model" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
+                    <div v-if=" $v.user.password.$error" class="invalid-feedback">
+                        <span v-if="!$v.user.password.required">Password is required</span>
+                        <span v-if="!$v.user.password.minLength">Password must be at least 8 characters</span>
+                    </div>
+
+                    <!-- <div class="alert alert-danger" v-if="errors && errors.errors">
                     <p>{{errors.errors.password[0]}}</p>
                 </div> -->
                 </div>
                
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus === 'PENDING'">Login</button>
-                     <p class="alert alert-warning" v-if="submitStatus === 'PENDING'">Sending...</p>
-                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
-                    <p>{{errors.errors.email[0]}}</p>
-                </div> -->
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus||$v.$invalid">Login</button>
+                     <div class="alert alert-warning" v-if="submitStatus "><b-spinner ></b-spinner></div>
+                   
                 </div>
                 <router-link to="/register">Register</router-link><br>
                 <router-link to="/request_token">Forgot Password</router-link>
@@ -67,7 +73,7 @@ export default {
             },
             submitted: false,
             success: false,
-            submitStatus: null,
+            submitStatus:false,
             errors: "",
             message: ""
         };
@@ -92,15 +98,10 @@ export default {
                this.$v.$touch();
             if (this.$v.$invalid) {
                
-                this.submitStatus = 'ERROR'
+               return
                 
-            } else {
-                // do your submit logic here
-                this.submitStatus = 'PENDING'
-                setTimeout(() => {
-                    this.submitStatus = 'OK'
-                }, 800)
-            }
+            }  this.submitStatus = true
+            
 
             let formData = {
                
@@ -114,15 +115,15 @@ export default {
 
                 }, ).then(res => {
                     this.success = true, 
-                this.submitted = false;
+                this.submitted = false,
                 this.errors= "",
-                this.formData = res.data,
-                this.user ={
+                this.formData = res.data
+            //     this.user ={
                 
-                email: null,
-                password: null,
+            //     email: null,
+            //     password: null,
                
-            }
+            // }
                 }).
             catch(error => {
                 if (error.response.status == 422) {
@@ -131,7 +132,7 @@ export default {
                 }
                 
                     console.log( this.errors = error.response.data)
-            })
+            }).finally(()=>{this.submitStatus=false})
 
         }
     }
