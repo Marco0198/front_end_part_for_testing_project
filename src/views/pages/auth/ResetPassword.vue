@@ -24,9 +24,9 @@
                         <span v-if="!$v.user.email.required">Email is required</span>
                         <span v-if="!$v.user.email.email">Email is invalid</span>
                     </div>
-                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
+                    
                 </div>
-                  
+                  <div class="text-danger .fs-2 my-3" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
                     <div class="form-group">
                     <input type="password" v-model="$v.user.password.$model" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
                     <div v-if=" $v.user.password.$error" class="invalid-feedback">
