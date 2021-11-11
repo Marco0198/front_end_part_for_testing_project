@@ -34,8 +34,7 @@
                 </div>
                
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus||$v.$invalid">Login</button>
-                     <div class="alert alert-warning" v-if="submitStatus "><b-spinner ></b-spinner></div>
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus||$v.$invalid">Login  <b-spinner small  v-if="submitStatus"></b-spinner></button>
                    
                 </div>
                 <router-link to="/register">Register</router-link><br>
@@ -111,7 +110,7 @@ export default {
                 // passwordConf:this.form.passwordConf,
             }
 
-            console.log(formData),
+         //   console.log(formData),
                 axios.post('https://mmt-web.herokuapp.com/api/login', formData, {
 
                 }, ).then(res => {
@@ -132,7 +131,7 @@ export default {
                     this.errors = error.response.data;
                 }
                 
-                    console.log( this.errors)
+                  //  console.log( this.errors)
             }).finally(()=>{this.submitStatus=false})
 
         }

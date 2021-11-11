@@ -20,9 +20,8 @@
                     <span class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></span>
                 </div>
                   <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus||$v.$invalid">Request</button>
-                     <div class="alert alert-warning" v-if="submitStatus "><b-spinner label="Spinning"></b-spinner></div>
-                   
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus||$v.$invalid">Request  <b-spinner small  v-if="submitStatus"></b-spinner></button>
+ 
                 </div>
             </form>
 
@@ -78,13 +77,13 @@ export default {
             let formData = {
                 email: this.user.email,
             }
-            console.log(formData),
+          //  console.log(formData),
                 axios.post('https://mmt-web.herokuapp.com/api/forgotten_password', formData, {
                    
                 })
                 .then(res => {
-                    this.message = res.data,
-                    console.log(res.data)
+                    this.message = res.data
+                  //  console.log(res.data)
                    // this.errors="",
                     // this.user= {
                     //   email: "",
@@ -93,7 +92,7 @@ export default {
             catch(error =>{
                   if (error.response.status == 422) { 
                        this.errors = error.response.data;
-                       console.log(this.errors)
+                     //  console.log(this.errors)
                        
                 }
              

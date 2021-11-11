@@ -54,11 +54,9 @@
                   
 
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Register</button>
-                     <div class="alert alert-warning" v-if="submitStatus "><b-spinner label="Spinning"></b-spinner></div>
-                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
-                    <p>{{errors.errors.email[0]}}</p>
-                </div> -->
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Register  <b-spinner small  v-if="submitStatus"></b-spinner></button>
+                     
+                 
                 </div>
 
             </form>
@@ -152,21 +150,21 @@ export default {
                 this.success = true, 
                 this.submitted = false;
                 this.message = res.data;
-                console.log(this.message)
-                this.user ={
-                name: null,
-                email: null,
-                password: null,
-                confirmPassword: null,
+              //  console.log(this.message)
+            //     this.user ={
+            //     name: null,
+            //     email: null,
+            //     password: null,
+            //     confirmPassword: null,
                  
-            }
+            // }
             
                 }).
             catch(error => {
                 if (error.response.status == 422) {
                      this.success = false
                this.errors = error.response.data;
-               console.log(this.errors.message)
+         //      console.log(this.errors.message)
                 this.errors = error.response.data;
                 }
                // this.message = this.errors.errors.email[0]

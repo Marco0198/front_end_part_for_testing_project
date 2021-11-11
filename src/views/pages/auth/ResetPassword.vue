@@ -50,17 +50,12 @@
                   
 
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Register</button>
-                     <div class="alert alert-warning" v-if="submitStatus "><b-spinner label="Spinning"></b-spinner></div>
-                    <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
-                    <p>{{errors.errors.email[0]}}</p>
-                </div> -->
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Register <b-spinner small  v-if="submitStatus"></b-spinner></button>
+    
                 </div>
 
             </form>
-             
-                  
-  
+ 
         </base-form>
     </div>
 </Layout>
@@ -139,7 +134,7 @@ export default {
                 password_confirmation: this.user.confirmPassword,
             }
 
-          //  console.log(formData),
+        
                 axios.post('https://mmt-web.herokuapp.com/api/reset_password', formData, {
 
                 
@@ -163,7 +158,7 @@ export default {
      
                this.errors = error.response.data;
                 //this.errors = this.errors.message;
-              console.log(this.errors)
+            //  console.log(this.errors)
             
                 
                // this.message = this.errors.errors.email[0]
