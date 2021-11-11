@@ -2,7 +2,7 @@
 <Layout name="LayoutDefault">
     <div>
         <base-form>
-            <h1>Reset Password</h1>
+            <h3 class="mb-4">Reset Password</h3>
             <form  @submit.stop.prevent="handleSubmit">
               <div class="alert alert-success" v-if="message && message.message ">
                     <p>{{message.message}}</p>

@@ -2,12 +2,13 @@
 <Layout name="LayoutDefault">
     <div>
         <base-form>
-            <h1>Sign In</h1>
+            <h3 class="mb-4">Sign In</h3>
             <form @submit.prevent="handleSubmit">
                 <div class="alert alert-success" v-if="success"> login succesfull</div>
-              <!-- <div class="alert alert-danger" v-if="submitted &&errors && errors.errors">
-                    <p>{{errors.errors.email[0]}}</p>
-                </div> -->
+              <div class="alert alert-danger" v-if="errors && errors.errors">
+                    <p>{{errors.message}}</p>
+                </div> 
+                
                
                 <div class="form-group">
 
@@ -27,10 +28,9 @@
                         <span v-if="!$v.user.password.required">Password is required</span>
                         <span v-if="!$v.user.password.minLength">Password must be at least 8 characters</span>
                     </div>
-
-                    <!-- <div class="alert alert-danger" v-if="errors && errors.errors">
-                    <p>{{errors.errors.password[0]}}</p>
-                </div> -->
+                 <div class="text-danger mt-3" v-if="errors ">
+                    <p>{{errors.password}}</p> 
+                </div> 
                 </div>
                
                 <div class="form-group">
@@ -101,8 +101,9 @@ export default {
                return
                 
             }  this.submitStatus = true
-            
-
+             this.success= false,
+             this.errors="",
+            this.message= ""
             let formData = {
                
                 email: this.user.email,
@@ -116,7 +117,7 @@ export default {
                 }, ).then(res => {
                     this.success = true, 
                 this.submitted = false,
-                this.errors= "",
+             
                 this.formData = res.data
             //     this.user ={
                 
@@ -131,7 +132,7 @@ export default {
                     this.errors = error.response.data;
                 }
                 
-                    console.log( this.errors = error.response.data)
+                    console.log( this.errors)
             }).finally(()=>{this.submitStatus=false})
 
         }

@@ -2,7 +2,7 @@
 <Layout name="LayoutDefault">
     <div>
         <base-form>
-            <h5>Request Token</h5>
+            <h3 class="mb-4">Request Token</h3>
             <form @submit.prevent="handleSubmit" method="POST">
                 <div class="alert alert-success" v-if="message && message.message ">
                     <p>{{message.message}}</p>
