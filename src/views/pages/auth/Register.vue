@@ -146,10 +146,12 @@ export default {
 
                 
                 }, ).then(res => {
-
+                    
                 this.success = true, 
                 this.submitted = false;
                 this.message = res.data;
+                 setTimeout( () => this.$router.push({ path: '/login'}), 1000);
+
               //  console.log(this.message)
             //     this.user ={
             //     name: null,
