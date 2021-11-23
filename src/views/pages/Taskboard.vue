@@ -1,14 +1,22 @@
 <template>
- <Layout name="LayoutDefault">
-    <h1>Taskboard</h1>
-  
-  </Layout>
+<Layout name="LayoutDefault">
+    <div >
+      <h1>create new task</h1>
+    </div>
+</Layout>
 </template>
+
 <script>
 import Layout from '@/layouts/Layout';
 
 export default {
-  components: { Layout }
-  
+    components: {
+        Layout
+    },
+    computed: {
+        isLogin() {
+            return this.$store.getters['login/isLogin']
+        }
+    }
 }
 </script>
