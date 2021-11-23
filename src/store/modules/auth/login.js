@@ -71,7 +71,6 @@ handleSubmit(context,payload) {
           router.push({ path: '/'});
          }
   
-     
 
      }).
  catch(error =>

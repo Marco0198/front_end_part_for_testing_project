@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import login from './modules/auth/login'
-
-
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -10,11 +9,36 @@ const store = new Vuex.Store({
   modules:{login},
   state() {
     return{
-      isLogin:false
+      isLogin:false,
+      user:null
+
+    }
+  },
+  getters: {
+    user(state){
+      return state.user
     }
   },
   mutations: {
-   
+    user(state,newUser){
+      state.user=newUser;
+    }
+  },
+  actions:{
+    getCurrentUser(context){
+     
+      axios.get('https://mmt-web.herokuapp.com/api/user', {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem('token')
+        }
+    }).then(response => {
+       context.commit('user',response.data)
+        console.log(response.data.name)
+     }).catch(error => {
+        console.log(error)
+      }) 
+    }
+
   }
 })
 export default store
