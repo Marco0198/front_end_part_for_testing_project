@@ -3,19 +3,17 @@ import axios from 'axios';
 import router from '@/router'
 
 
-const state= 
-{
+const state={
     submitted: false,
     success: false,
     submitStatus:false,
     errors: "",
     message: "",
-    isLogin :false,
+    isLogin :!!localStorage.getItem("token")
 
 };
-const getters=
-{
-       loadingStatus(state){
+const getters={
+    loadingStatus(state){
        return state.submitStatus
       },
        errors(state){
@@ -30,15 +28,12 @@ const getters=
 
 
 };
-const mutations=
-{
-    loginStatus(state,loginStatus)
-    {
+const mutations={
+    loginStatus(state,loginStatus){
       state.isLogin = loginStatus;
     }
 };
-const actions=
-{
+const actions={
 logout(context)
 {
 context.commit('loginStatus',false)   
@@ -52,8 +47,8 @@ handleSubmit(context,payload) {
   state.message= ""
   let formData = 
   {
- email: payload.email,
- password: payload.password,
+     email: payload.email,
+     password: payload.password,
   
  }
 
@@ -63,7 +58,7 @@ handleSubmit(context,payload) {
      }, ).then(res => {
          if(res.data)
          {
-         state.isLogin =true, 
+            context.commit('loginStatus',true) 
         // console.log( res.data.token)
          state.success = true, 
          state.submitted = false,
@@ -71,17 +66,18 @@ handleSubmit(context,payload) {
           router.push({ path: '/'});
          }
   
+     
 
      }).
  catch(error =>
      {
      if (error.response.status == 422) {
-          state.isLogin =true,
+       // context.commit('loginStatus',false)
           state.success = false,
           state.errors = error.response.data;
      }
      
-       //console.log( state.errors)
+       //  console.log( state.errors)
  }).finally(()=>
     {
      //state.isLogin =false,

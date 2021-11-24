@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   modules:{login},
   state() {
     return{
-      isLogin:false,
+   
       user:null
 
     }
@@ -23,6 +23,7 @@ const store = new Vuex.Store({
     user(state,newUser){
       state.user=newUser;
     }
+    
   },
   actions:{
     getCurrentUser(context){

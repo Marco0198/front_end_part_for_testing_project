@@ -18,12 +18,14 @@ export default {
         return {
         // user: null
         }
-    }, created() {
+    }, created() 
+    {
        this.$store.dispatch('getCurrentUser')
     },
          
-         computed: {
-        isLogin() {
+    computed: {
+        isLogin() 
+        {
             return this.$store.getters['login/isLogin']
         },
         user (){
