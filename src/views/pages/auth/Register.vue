@@ -19,16 +19,36 @@
                     <p>{{errors.errors.name[0]}}</p>
                 </div>-->
                 </div>
+                 <div class="form-group">
+                    <input v-model="$v.user.surname.$model" id="surname" name="surname" placeholder="Surname" class="form-control" :class="{ 'is-invalid':  $v.user.surname.$error }" />
+                    <div v-if="$v.user.surname.$error" class="invalid-feedback">
+                       <span v-if="!$v.user.surname.required" > Surname is required</span>
+                    <span v-if="!$v.user.surname.minLength" >Surname must be at least 3 characters</span>
+                    </div>
+                  
+                </div>
                 <div class="form-group">
 
                     <input v-model="$v.user.email.$model" id="email" name="email" placeholder="Email" class="form-control" :class="{ 'is-invalid':  $v.user.email.$error }" />
                     <div v-if="$v.user.email.$error" class="invalid-feedback">
                         <span v-if="!$v.user.email.required">Email is required</span>
-                        <span v-if="!$v.user.email.email">Email is invalid</span>
+                        <span v-if="!$v.user.email.email">Email is invalid</span>                
+                    </div>
+                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
+                </div>
+
+         
+                <div class="form-group">
+
+                    <input v-model="$v.user.phone.$model" id="phone" name="phone" placeholder="Phone Number" class="form-control" :class="{ 'is-invalid':  $v.user.phone.$error }" />
+                    <div v-if="$v.user.email.$error" class="invalid-feedback">
+                        <span v-if="!$v.user.phone.required">phone number is required</span>
+                        <span v-if="!$v.user.phone.minLength">phone number min length is 10</span>
+                        <span v-if="!$v.user.phone.maxLength">phone number max length is 10</span>
                   
 
                     </div>
-                    <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
+                   
                 </div>
                    
                     <div class="form-group">
@@ -75,7 +95,8 @@ import {
     required,
     email,
     minLength,
-    sameAs
+    sameAs,
+    maxLength
 }
  
 from "vuelidate/lib/validators"
@@ -90,7 +111,9 @@ export default {
         return {
             user: {
                 name: "",
+                surname: "",
                 email: "",
+                 phone:"",
                 password: "",
                 confirmPassword: ""
             },
@@ -107,9 +130,18 @@ export default {
                 required,
                 minLength: minLength(3)
             },
+            surname: {
+                required,
+                minLength: minLength(3)
+            },
             email: {
                 required,
                 email
+            },
+             phone: {
+                required,
+                minLength: minLength(10),
+                maxLength: maxLength(10)
             },
             password: {
                 required,
@@ -136,7 +168,9 @@ export default {
              this.errors= ""
             let formData = {
                 name: this.user.name,
+                surname: this.user.surname,
                 email: this.user.email,
+                phone: this.user.phone,
                 password: this.user.password,
                 password_confirmation: this.user.confirmPassword,
             }
