@@ -2,7 +2,7 @@
 <Layout name="LayoutDefault">
     <div>
         <b-card
-         style="width: 350px"
+         style="width: 550px"
          class=""> 
         
            
