@@ -9,7 +9,7 @@ import Register from "../views/pages/auth/Register.vue";
 import RequestResetPassword from "../views/pages/auth/RequestResetPassword.vue";
 import ResetPassword from "../views/pages/auth/ResetPassword.vue";
 import NotFound from "../views/pages/NotFound.vue";
-
+import Profile from "../views/pages/auth/Profile.vue";
 
 
 Vue.use(VueRouter)
@@ -41,6 +41,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+   
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
    
   },
    {

@@ -12,7 +12,7 @@
         <b-nav-item to="/" >Home</b-nav-item>
         <b-nav-item to="/about">About</b-nav-item>
         <b-nav-item to="/contact">Contact</b-nav-item>
-        <b-nav-item :to="{ path: '/Taskboard' }" >Tasboard</b-nav-item>
+        <b-nav-item v-if="isLogin" :to="{ path: '/Taskboard' }" >Tasboard</b-nav-item>
 
         
       </b-navbar-nav>
@@ -20,7 +20,17 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
           <router-link v-if="!isLogin" to="/login"><button class="btn btn-danger text-center">Login</button></router-link>
-          <a v-if="isLogin"><button  @click="logout" class="btn btn-danger text-center">Logout</button></a>
+          <div v-if="isLogin">
+         <b-dropdown type="dark" variant="ligth">
+        <template #button-content>
+        <b-avatar class="mr-5"></b-avatar>
+      </template>
+       <b-dropdown-item class="ml-2" href="#">Profile</b-dropdown-item>
+       <b-dropdown-item ><b-nav-item ><button  @click="logout" class="btn btn-light ">Logout</button></b-nav-item></b-dropdown-item>
+     </b-dropdown>
+         <!-- <b-avatar class="mr-5"></b-avatar>
+          <a ><button  @click="logout" class="btn btn-danger ">Logout</button></a>-->
+          </div>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -32,13 +42,23 @@ export default {
       computed: {
         isLogin() {
             return this.$store.getters['login/isLogin']
+        },
+        
+        user (){
+         return this.$store.getters.user
+          
         }
       },
         methods: {
           logout() {
             this.$store.dispatch('login/logout')
             return this.$store.getters['login/isLogin']
-          }
+          },
+           created() 
+    {
+       this.$store.dispatch('getCurrentUser')
+    },
+
          
         }
     
