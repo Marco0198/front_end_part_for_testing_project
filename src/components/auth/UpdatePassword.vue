@@ -3,7 +3,7 @@
     <div>
         <b-card
          style="width: 550px"
-         class=""> 
+         class="shadow p-1 mb-3 bg-white rounded"> 
         
            
             <form  @submit.stop.prevent="handleSubmit">
