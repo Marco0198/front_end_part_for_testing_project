@@ -25,7 +25,7 @@
         <template #button-content>
         <b-avatar class="mr-5"></b-avatar>
       </template>
-       <b-dropdown-item class="ml-2" href="#">Profile</b-dropdown-item>
+       <b-dropdown-item class="ml-2" to="/profile">Profile</b-dropdown-item>
        <b-dropdown-item ><b-nav-item ><button  @click="logout" class="btn btn-light ">Logout</button></b-nav-item></b-dropdown-item>
      </b-dropdown>
          <!-- <b-avatar class="mr-5"></b-avatar>
