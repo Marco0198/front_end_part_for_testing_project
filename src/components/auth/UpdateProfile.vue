@@ -4,7 +4,7 @@
         <b-card 
          class="ml-2 shadow p-1 mb-3 bg-white rounded"> 
             
-            <h4 class="mb-4">Profile</h4>
+            <h4 class="mb-4">Details</h4>
             
            <b-avatar class="mb-5" size="6rem"></b-avatar>
             <form  @submit.stop.prevent="handleSubmit" class="form-row" >
