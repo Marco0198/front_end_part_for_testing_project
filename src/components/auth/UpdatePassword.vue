@@ -15,7 +15,7 @@
                 </div>
                  <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.message}}</small></div>
                <div class="form-group">
-                    <input type="text" v-model="$v.user.currentPassword.$model" id="firstName" name="firstName" placeholder="current password" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
+                    <input type="text" v-model="$v.user.currentPassword.$model" id="password" name="firstName" placeholder="current password" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
                     <span v-if="!$v.user.currentPassword.required" class="invalid-feedback"> Current Password is required</span>
                     
                      <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.currentPassword[0]}}</small></div>
@@ -23,7 +23,7 @@
                 
                   
                     <div class="form-group">
-                    <input type="password" v-model="$v.user.password.$model" id="password" name="new password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
+                    <input type="password" v-model="$v.user.password.$model" id="newpassword" name="new password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
                     <div v-if=" $v.user.password.$error" class="invalid-feedback">
                         <span v-if="!$v.user.password.required">Password is required</span>
                         <span v-if="!$v.user.password.minLength">Password must be at least 8 characters</span>
@@ -123,12 +123,8 @@ export default {
                 password: this.user.password,
                 password_confirmation: this.user.confirmPassword,
             }
-
-        
-                axios.put('https://mmt-web.herokuapp.com/api/change_password', formData, {
-
-                
-                }, ).then(res => {
+                axios.put('https://mmt-web.herokuapp.com/api/change_password', formData,{ headers:{ Authorization: "Bearer"+localStorage.getItem('token') }
+                }).then(res => {
 
                 this.success = true, 
                 this.submitted = false;

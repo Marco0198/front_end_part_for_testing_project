@@ -7,16 +7,16 @@
             <h4 class="mb-4">Details</h4>
             
            <b-avatar class="mb-5" size="6rem"></b-avatar>
-            <form  @submit.stop.prevent="handleSubmit" class="form-row" >
+            <form  @submit.stop.prevent="handleSubmit"  >
               <div class="alert alert-success" v-if="message && message.message ">
                     <p>{{message.message}}</p>
                 </div>
                  <div class="alert alert-danger" v-if="errors&& errors.errors ">
                     <p>{{errors.message}}</p>
                 </div>
+                <div class="form-row">
                  <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.message}}</small></div>
-              
-                    
+               
                <div class="form-group col-md-6">
                     <input type="text" v-model="$v.user.name.$model" id="firstName" name="firstName" placeholder="Name" class="form-control" :class="{ 'is-invalid':  $v.user.name.$error }" />
                     <span v-if="!$v.user.name.required" class="invalid-feedback"> Name is required</span>
@@ -26,14 +26,11 @@
                 </div>-->
                 </div>
                
-              
                  <div class="form-group col-md-6 ">
                     <input v-model="$v.user.surname.$model" id="surname" name="surname" placeholder="Surname" class="form-control" :class="{ 'is-invalid':  $v.user.surname.$error }" />
                     <div v-if="$v.user.surname.$error" class="invalid-feedback">
                        <span v-if="!$v.user.surname.required" > Surname is required</span>
                     <span v-if="!$v.user.surname.minLength" >Surname must be at least 3 characters</span>
-                    
-                  
                 </div>
                  </div>
                
@@ -46,8 +43,7 @@
                     </div>
                     <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.email[0]}}</small></div>
                 </div>
-              
-        
+            
                 <div class="form-group col-md-6 ">
 
                     <input v-model="$v.user.phone.$model" id="phone" name="phone" placeholder="Phone Number" class="form-control" :class="{ 'is-invalid':  $v.user.phone.$error }" />
@@ -58,19 +54,17 @@
                     </div>
                     </div>
            
-                       
-
                 <div class="form-group mt-3">
                     <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Update <b-spinner small  v-if="submitStatus"></b-spinner></button>
-                     
-                 
-              
+            
+              </div>
                </div>
             </form>
              
                   
-  
+
         </b-card>
+        
     </div>
 </Layout>
 </template>
@@ -151,16 +145,18 @@ export default {
               
             }
 
-            console.log(formData),
-                axios.put('https://mmt-web.herokuapp.com/api/profile_update', formData, {
-
+          //  console.log(formData),
+                axios.put('https://mmt-web.herokuapp.com/api/profile_update', formData, 
+{headers:{
+            Authorization: 'Bearer'+ localStorage.getItem('token')
+        }
                 
                 }, ).then(res => {
                     
                 this.success = true, 
                 this.submitted = false;
                 this.message = res.data;
-                this.$router.push({ path: '/login'});
+               // this.$router.push({ path: '/login'});
 
               //  console.log(this.message)
             //     this.user ={
