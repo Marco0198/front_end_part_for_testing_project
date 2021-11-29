@@ -2,7 +2,7 @@
 <Layout name="LayoutDefault">
     <div>
         <b-card
-         style="width: 550px"
+     
          class="shadow p-1 mb-3 bg-white rounded"> 
         
            

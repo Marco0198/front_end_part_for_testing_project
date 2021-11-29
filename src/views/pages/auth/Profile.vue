@@ -4,7 +4,7 @@
  
  <div class="d-flex bd-highlight">
   <div class="p-2 flex-grow-1 bd-highlight"><update-profile></update-profile></div>
-  <div class="p-2 bd-highlight"><update-password></update-password></div>
+  <div class="p-2 bd-highlight flex-sm-grow-1"><update-password></update-password></div>
 
 </div>
 

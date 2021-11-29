@@ -1,7 +1,7 @@
 <template>
 <Layout name="LayoutDefault">
     <div>
-        <b-card style="width:auto"
+        <b-card 
          class="ml-2 shadow p-1 mb-3 bg-white rounded"> 
             
             <h4 class="mb-4">Profile</h4>
