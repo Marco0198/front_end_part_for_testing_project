@@ -1,8 +1,11 @@
 <template>
 <Layout name="LayoutDefault">
     <div>
-        <base-form>
-            <h3 class="mb-4">Reset Password</h3>
+        <b-card
+         style="width: 350px"
+         class=""> 
+        
+           
             <form  @submit.stop.prevent="handleSubmit">
               <div class="alert alert-success" v-if="message && message.message ">
                     <p>{{message.message}}</p>
@@ -12,7 +15,7 @@
                 </div>
                  <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.message}}</small></div>
                <div class="form-group">
-                    <input type="text" v-model="$v.user.currentPassword.$model" id="firstName" name="firstName" placeholder="Token" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
+                    <input type="text" v-model="$v.user.currentPassword.$model" id="firstName" name="firstName" placeholder="current password" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
                     <span v-if="!$v.user.currentPassword.required" class="invalid-feedback"> Current Password is required</span>
                     
                      <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.currentPassword[0]}}</small></div>
@@ -20,7 +23,7 @@
                 
                   
                     <div class="form-group">
-                    <input type="password" v-model="$v.user.password.$model" id="password" name="password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
+                    <input type="password" v-model="$v.user.password.$model" id="password" name="new password" placeholder="Password" class="form-control" :class="{ 'is-invalid':  $v.user.password.$error }" />
                     <div v-if=" $v.user.password.$error" class="invalid-feedback">
                         <span v-if="!$v.user.password.required">Password is required</span>
                         <span v-if="!$v.user.password.minLength">Password must be at least 8 characters</span>
@@ -32,7 +35,7 @@
                 </div>
                 <div class="form-group">
 
-                    <input type="password" v-model="$v.user.confirmPassword.$model" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" class="form-control" :class="{ 'is-invalid': $v.user.confirmPassword.$error }" />
+                    <input type="password" v-model="$v.user.confirmPassword.$model" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" class="form-control" :class="{ 'is-invalid': $v.user.confirmPassword.$error }" />
                     <div v-if="$v.user.confirmPassword.$error" class="invalid-feedback">
                         <span v-if="!$v.user.confirmPassword.required">Confirm Password is required</span>
                         <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
@@ -42,13 +45,13 @@
                   
 
                 <div class="form-group">
-                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Register <b-spinner small  v-if="submitStatus"></b-spinner></button>
+                    <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Update <b-spinner small  v-if="submitStatus"></b-spinner></button>
     
                 </div>
 
             </form>
  
-        </base-form>
+        </b-card>
     </div>
 </Layout>
 </template>
@@ -63,11 +66,11 @@ import {
 }
  
 from "vuelidate/lib/validators"
-import BaseForm from '@/components/UI/BaseForm.vue'
+
 import axios from 'axios'
 export default {
     components: {
-        BaseForm,
+      
         Layout
     },
     data() {
