@@ -6,18 +6,21 @@
          class="shadow p-1 mb-3 bg-white rounded"> 
          <h4 class="mb-4">Credentials</h4>
            
-            <form  @submit.stop.prevent="handleSubmit">
-              <div class="alert alert-success" v-if="message && message.message ">
-                    <p>{{message.message}}</p>
+            <form  @submit.stop.prevent="handleSubmit" >
+              <div class="alert alert-success" v-if="message ">
+                    <p>{{message.Message}}</p>
                 </div>
-                 <div class="alert alert-danger" v-if="errors && errors.errors ">
-                    <p>{{errors.message}}</p>
+                 <div class="alert alert-danger" v-if="errors ">
+                    <p>{{errors}}</p>
                 </div>
+                 <div v-show="hideForm">
+
+                 
                  <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.message}}</small></div>
                <div class="form-group">
-                    <input type="text" v-model="$v.user.currentPassword.$model" id="password" name="firstName" placeholder="current password" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
+                    <input type="password" v-model="$v.user.currentPassword.$model" id="password" name="firstName" placeholder="current password" class="form-control" :class="{ 'is-invalid':  $v.user.currentPassword.$error }" />
                     <span v-if="!$v.user.currentPassword.required" class="invalid-feedback"> Current Password is required</span>
-                    
+                    <span v-if="!$v.user.password.minLength" class="invalid-feedback">Password must be at least 8 characters</span>
                      <div class="text-danger .fs-2" v-if="errors && errors.errors"><small>{{errors.errors.currentPassword[0]}}</small></div>
                 </div>
                 
@@ -48,7 +51,7 @@
                     <button class="btn btn-danger" type="submit" :disabled="submitStatus ||$v.$invalid">Update <b-spinner small  v-if="submitStatus"></b-spinner></button>
     
                 </div>
-
+             </div>
             </form>
  
         </b-card>
@@ -84,7 +87,8 @@ export default {
             success: false,
             submitStatus: false,
             errors: "",
-            message: ""
+            message: "",
+            hideForm:true,
         };
     },
     validations: {
@@ -121,39 +125,34 @@ export default {
             let formData = {
                 current_password: this.user.currentPassword,
                 password: this.user.password,
-                password_confirmation: this.user.confirmPassword,
+                confirm_password: this.user.confirmPassword,
             }
-                axios.put('https://mmt-web.herokuapp.com/api/change_password', formData,{ headers:{ Authorization: "Bearer"+localStorage.getItem('token') }
+                axios.put('https://mmt-web.herokuapp.com/api/change_password', formData,{ headers:{ 
+                     Authorization: "Bearer " + localStorage.getItem('token')
+ }
                 }).then(res => {
-
+                    
+                this.hideForm = false,
                 this.success = true, 
                 this.submitted = false;
                 this.message = res.data;
-                this.$router.push({ path: '/login'});
+                this.$router.push({ path: '/taskboard'});
 
-              // console.log(this.message)
-            //     this.user ={
-            //     token: null,
-            //     email: null,
-            //     password: null,
-            //     confirmPassword: null,
-                 
-            // }
-            
+             
                 }).
             catch(error => {
                 // this.submitStatus = false;
      
                this.errors = error.response.data;
-                //this.errors = this.errors.message;
-            //  console.log(this.errors)
+               this.errors = this.errors.message;
+               console.log(this.errors)
             
                 
                // this.message = this.errors.errors.email[0]
                   //  console.log(this.message)
             }).finally(()=>{
-               // this.message=null;
-               
+             
+               // setTimeout(() => this.hideForm = true, 800);
                 this.submitStatus = false;
                 })
 

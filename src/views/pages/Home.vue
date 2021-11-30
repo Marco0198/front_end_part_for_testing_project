@@ -2,7 +2,7 @@
 <Layout name="LayoutDefault">
     <div v-show="isLogin">
         <h1>home page</h1>
-        <p v-if="user">Hi {{user.name}}</p>
+       
     </div>
 </Layout>
 </template>

@@ -34,7 +34,8 @@ const store = new Vuex.Store({
         }
     }).then(response => {
        context.commit('user',response.data)
-        console.log(response.data.name)
+       localStorage.setItem('user',JSON.stringify(response.data))
+        console.log(response.data)
      }).catch(error => {
         console.log(error)
       }) 

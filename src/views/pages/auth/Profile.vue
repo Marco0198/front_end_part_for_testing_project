@@ -2,7 +2,7 @@
  <Layout name="LayoutDefault">
    <div>
  
- <div class="d-flex bd-highlight">
+ <div class="d-flex bd-highlight" >
   <div class="p-2 flex-grow-1 bd-highlight"><update-profile></update-profile></div>
   <div class="p-2 bd-highlight flex-lg-grow-1"><update-password></update-password></div>
 
@@ -18,7 +18,9 @@ import UpdatePassword from '@/components/auth/UpdatePassword';
 import UpdateProfile from '@/components/auth/UpdateProfile';
 
 export default {
-  components: { Layout,UpdatePassword ,UpdateProfile }
-  
+  components: { Layout,UpdatePassword ,UpdateProfile },
+    computed: {
+       
+    }
 }
 </script>

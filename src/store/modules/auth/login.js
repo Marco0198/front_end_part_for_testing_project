@@ -38,6 +38,8 @@ logout(context)
 {
 context.commit('loginStatus',false)   
 localStorage.removeItem('token')
+localStorage.removeItem('user')
+
 },
 handleSubmit(context,payload) {
   state.submitStatus = true
