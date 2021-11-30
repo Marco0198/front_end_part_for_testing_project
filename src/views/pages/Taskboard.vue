@@ -12,10 +12,19 @@ import Layout from '@/layouts/Layout';
 export default {
     components: {
         Layout
+    }, created() 
+    {
+       this.$store.dispatch('getCurrentUser')
     },
+         
     computed: {
-        isLogin() {
+        isLogin() 
+        {
             return this.$store.getters['login/isLogin']
+        },
+        user (){
+         return this.$store.getters.user
+          
         }
     }
 }
