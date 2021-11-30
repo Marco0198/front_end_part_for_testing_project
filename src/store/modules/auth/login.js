@@ -65,7 +65,7 @@ handleSubmit(context,payload) {
          state.success = true, 
          state.submitted = false,
          localStorage.setItem("token",res.data.token)
-          router.push({ path: '/'});
+          router.push({ path: '/taskboard'});
          }
   
      
