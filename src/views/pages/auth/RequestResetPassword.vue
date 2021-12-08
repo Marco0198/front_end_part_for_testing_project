@@ -12,7 +12,7 @@
           </div>
 
           <div class="form-group">
-            <label for="email" class="float-left">Eamil</label>
+            <label for="email" class="float-left">Email</label>
             <input
               type="email"
               v-model="$v.user.email.$model"

@@ -14,7 +14,7 @@
             <small>{{ errors.errors.message }}</small>
           </div>
           <div class="form-group">
-            <label for="token">Token</label>
+            <label for="token" class="float-left">Token</label>
             <input
               type="text"
               v-model="$v.user.token.$model"
@@ -32,6 +32,7 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="email" class="float-left">Email</label>
             <input
               v-model="$v.user.email.$model"
               id="email"
@@ -50,6 +51,7 @@
           </div>
 
           <div class="form-group">
+            <label for="password" class="float-left">Password</label>
             <input
               type="password"
               v-model="$v.user.password.$model"
@@ -73,6 +75,7 @@
                 </div> -->
           </div>
           <div class="form-group">
+            <label for="confirmPassword" class="float-left">Password Confirmation</label>
             <input
               type="password"
               v-model="$v.user.confirmPassword.$model"
