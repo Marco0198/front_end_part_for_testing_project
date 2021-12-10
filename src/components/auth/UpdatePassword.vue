@@ -9,14 +9,14 @@
             <p>{{ message.Message }}</p>
           </div>
           <div class="alert alert-danger" v-if="errors">
-            <p>{{ errors }}</p>
+            <p>{{ errors.message }}</p>
           </div>
-          <div v-show="hideForm">
+          
             <div class="text-danger .fs-2" v-if="errors && errors.errors">
               <small>{{ errors.errors.message }}</small>
             </div>
             <div class="form-group">
-                <label for="password" class="float-left">Password</label>
+              <label for="password" class="float-left">Password</label>
               <input
                 type="password"
                 v-model="$v.user.currentPassword.$model"
@@ -35,13 +35,13 @@
               <span v-if="!$v.user.password.minLength" class="invalid-feedback"
                 >Password must be at least 8 characters</span
               >
-              <div class="text-danger .fs-2" v-if="errors && errors.errors">
-                <small>{{ errors.errors.currentPassword[0] }}</small>
+              <div class="text-danger .fs-2" v-if="errors">
+                <small>{{errors.current_password }}</small>
               </div>
             </div>
 
             <div class="form-group">
-                <label for="newpassword" class="float-left">New password</label>
+              <label for="newpassword" class="float-left">New password</label>
               <input
                 type="password"
                 v-model="$v.user.password.$model"
@@ -65,7 +65,9 @@
                 </div> -->
             </div>
             <div class="form-group">
-                <label for="confirmPassword" class="float-left">confirm new password</label >
+              <label for="confirmPassword" class="float-left"
+                >confirm new password</label
+              >
               <input
                 type="password"
                 v-model="$v.user.confirmPassword.$model"
@@ -97,7 +99,7 @@
                 Update <b-spinner small v-if="submitStatus"></b-spinner>
               </button>
             </div>
-          </div>
+          
         </form>
       </b-card>
     </div>
@@ -131,7 +133,6 @@ export default {
   validations: {
     user: {
       currentPassword: {
-        required,
         minLength: minLength(8),
       },
 
@@ -172,13 +173,13 @@ export default {
             (this.success = true),
             (this.submitted = false);
           this.message = res.data;
-          this.$router.push({ path: "/taskboard" });
+          // this.$router.push({ path: "/taskboard" });
         })
         .catch((error) => {
           // this.submitStatus = false;
 
           this.errors = error.response.data;
-          this.errors = this.errors.message;
+          //this.errors = this.errors.message;
           console.log(this.errors);
 
           // this.message = this.errors.errors.email[0]
