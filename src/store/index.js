@@ -35,7 +35,7 @@ const store = new Vuex.Store({
           context.commit("user", response.data);
 
           localStorage.setItem("user", JSON.stringify(response.data));
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
