@@ -45,7 +45,6 @@
                 <label for="surname" class="float-left">Surname</label>
                 <input
                   v-model="$v.user.surname.$model"
-
                   id="surname"
                   name="surname"
                   :placeholder="user.surname"
@@ -202,9 +201,7 @@ export default {
           (this.success = true), (this.submitted = false);
           this.message = res.data;
           localStorage.setItem("user", JSON.stringify(this.user));
-          window.location.reload()
-
-       
+           window.location.reload()
         })
         .catch((error) => {
           if (error.response.status == 422) {
@@ -217,7 +214,6 @@ export default {
           //  console.log(this.message)
         })
         .finally(() => {
-         
           this.submitStatus = false;
         });
     },

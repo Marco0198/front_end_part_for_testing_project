@@ -1,17 +1,20 @@
 <template>
   <Layout name="LayoutDefault">
     <div>
-      <h1>create new task</h1>
+      
+      <create-task></create-task>
+       <display-all-task></display-all-task>
     </div>
   </Layout>
 </template>
 
 <script>
 import Layout from "@/layouts/Layout";
-
+import CreateTask from "@/components/task/CreateTask";
+import DisplayAllTask from "@/components/task/DisplayAllTask";
 export default {
   components: {
-    Layout,
+    Layout,CreateTask,DisplayAllTask
   },
   created() {
     this.$store.dispatch("getCurrentUser");
