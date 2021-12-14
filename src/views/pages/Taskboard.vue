@@ -1,8 +1,7 @@
 <template>
   <Layout name="LayoutDefault">
     <div>
-      
-      <create-task></create-task>
+       <create-task></create-task>
        <display-all-task></display-all-task>
     </div>
   </Layout>

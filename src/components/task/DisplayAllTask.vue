@@ -26,9 +26,9 @@
           <p>{{ task.title }}</p>
         </div>
         <div class=" justify-content-end pt-5">
-          <button>pending</button>
-          <button>active</button>
-          <button>Done</button>
+          <button class="btn btn-danger mr-1">pending</button>
+          <button class="btn btn-info mr-1">active</button>
+          <button class="btn btn-success mr-1">Done</button>
         </div>
       </b-card>
     </div>
