@@ -3,7 +3,7 @@
     <b-spinner v-if="isLoading" label="Spinning"></b-spinner>
 
     <div v-for="task in tasks" :key="task.id" class="d-inline-block">
-      <b-spinner v-if="isLoading" label="Spinning"></b-spinner>
+      <b-spinner v-if="isLoading" label="Spinning">LOADING...</b-spinner>
       <b-card
         style="width: 25rem; height: auto"
         class="mb-2 ml-2 mr-2 shadow p-3 mb-5 bg-white rounded"
@@ -63,7 +63,9 @@ export default {
       .catch((error) => {
         console.log(error);
       })
-      .finally((this.isLoading = false));
+      .finally(()=>{
+          this.isLoading = false;
+      });
   },
 };
 </script>
