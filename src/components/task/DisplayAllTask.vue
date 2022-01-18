@@ -7,7 +7,7 @@
     <div v-for="task in tasks" :key="task.id" class="d-inline-block">
       
       <b-card
-        style="width: 23rem; height: 38rem"
+        style="width: 23rem; height: 40rem"
         class="mb-2 ml-2 mr-2 shadow p-3 mb-5 bg-white rounded"
       >
         <div class="float-right mr-2 mb-5">
@@ -174,8 +174,7 @@ export default {
        updateTask() {
        this.$bvModal.show("modal")    },
        
-       closeModal() {
-       this.$bvModal.hide("modal")    }
+      
        }
 
 };
