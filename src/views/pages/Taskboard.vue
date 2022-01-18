@@ -1,7 +1,7 @@
 <template>
   <Layout name="LayoutDefault">
     <div>
-       <create-task></create-task>
+       
        <display-all-task></display-all-task>
     </div>
   </Layout>
@@ -9,11 +9,11 @@
 
 <script>
 import Layout from "@/layouts/Layout";
-import CreateTask from "@/components/task/CreateTask";
+//import CreateTask from "@/components/task/CreateTask";
 import DisplayAllTask from "@/components/task/DisplayAllTask";
 export default {
   components: {
-    Layout,CreateTask,DisplayAllTask
+    Layout,DisplayAllTask
   },
   created() {
     this.$store.dispatch("getCurrentUser");
