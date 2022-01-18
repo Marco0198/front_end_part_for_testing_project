@@ -151,7 +151,7 @@ export default {
   },
 
   created() {
-   // this.isLoading = true;
+   this.isLoading = true;
     axios
       .get("https://mmt-web.herokuapp.com/api/task")
       .then((res) => {
@@ -163,7 +163,7 @@ export default {
         console.log(error);
       })
       .finally(()=>{
-      // this.isLoading = false;
+       this.isLoading = false;
         
 
       });
