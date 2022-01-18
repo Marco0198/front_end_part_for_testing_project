@@ -33,7 +33,7 @@
           <p> <span class="float-left mr-1 font-weight-bold">Description:</span>{{ task.description }}</p>
           <p> <span class="float-left font-weight-bold">Attach:</span><button >file </button></p>
         </div>
-        <div class=" justify-content-end pt-5"><span class="float-left mr-3 font-weight-bold">Status</span>
+        <div class=" justify-content-end pt-5"><span class="float-left mr-1 font-weight-bold">Status</span>
           <button class="btn btn-danger mr-1">pending</button>
           <button class="btn btn-info mr-1">active</button>
           <button class="btn btn-success mr-1">Done</button>
