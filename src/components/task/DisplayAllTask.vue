@@ -1,11 +1,8 @@
 <template>
   <div>
    <b-button class="btn btn-warning mb-5" v-b-modal.modal>Create Task</b-button><br>
-
     <b-spinner v-if="isLoading" label="Spinning"></b-spinner>
-  
     <div v-for="task in tasks" :key="task.id" class="d-inline-block">
-      
       <b-card
         style="width: 23rem; height: 40rem"
         class="mb-2 ml-2 mr-2 shadow p-3 mb-5 bg-white rounded"
@@ -15,13 +12,14 @@
              class="mr-2"
              variant="primary"
              icon=" pencil-square
-"            @click="updateTask"
+"            @click="updateTask(task)"
              aria-hidden="true"
           ></b-icon>
           <b-icon
             variant="danger"
             icon="trash-fill"
             aria-hidden="true"
+            @click="deleteTask(task.id)"
           ></b-icon>
         </div>
 
@@ -47,7 +45,6 @@
       title="Create Task"
       :hide-footer="true"
       :hide-header="true"
-      
     >
        <b-icon @click="$bvModal.hide('modal')" icon="x-circle"  variant="danger" aria-hidden="true"></b-icon>
 
@@ -171,8 +168,16 @@ export default {
   },
   methods:{
      
-       updateTask() {
+       updateTask(task) {
+         this.task=task,
        this.$bvModal.show("modal")    },
+
+       deleteTask(id){
+         axios.delete('https://mmt-web.herokuapp.com/api/task/'+id).then(()=>{
+           alert('delete')
+             }
+         )
+       }
        
       
        }
